@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Coronavirus Tracker application</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Coronavirus Tracker Application</h1>
+		<p>This application lists the current number of cases reported
+			across the globe</p>
+			
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-4" th:text="${totalReportedCases}"></h1>
+				<p class="lead">Total cases reported as a today </p>
+				<hr class="my-4">
+				<p>
+					<span>New cases reported since yesterday:</span>
+					<span  th:text="${totalNewCases}"></span>
+				</p>
+			</div>
+		</div>
+
+		<table class="table">
+			<tr>
+<!-- 				<th><a th:href = "@{/}">State</a></th> -->
+				<th>State  
+				<a th:href = "@{/}"><i class="fa fa-arrow-circle-o-down" style="color:black"></i></a>
+				<a th:href = "@{/asc}"><i class="fa fa-arrow-circle-o-up" style="color:black"></i></a></th>
+				<th>Country  <a th:href = "@{/country_desc}"><i class="fa fa-arrow-circle-o-down" style="color:black"></i></a>
+				<a th:href = "@{/country_asc}"><i class="fa fa-arrow-circle-o-up" style="color:black"></i></a></th>
+				<th>Total cases reported  
+				<a th:href = "@{/latestTotalCases_desc}"><i class="fa fa-arrow-circle-o-down" style="color:black"></i></a>
+				<a th:href = "@{/latestTotalCases_asc}"><i class="fa fa-arrow-circle-o-up" style="color:black"></i></a></th>
+				<th>Changes since last day  
+				<a th:href = "@{/diffFromPrevDay_desc}"><i class="fa fa-arrow-circle-o-down" style="color:black"></i></a>
+				<a th:href = "@{/diffFromPrevDay_asc}"><i class="fa fa-arrow-circle-o-up" style="color:black"></i></a></th>
+			</tr>
+			<tr th:each="locationStat : ${locationStats}">
+				<td th:text="${locationStat.state}"></td>
+				<td th:text="${locationStat.country}"></td>
+				<td th:text="${locationStat.latestTotalCases}">0</td>
+				<td th:text="${locationStat.diffFromPrevDay}">0</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
+</html>
